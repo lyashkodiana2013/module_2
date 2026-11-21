@@ -1,7 +1,11 @@
 package io.github.Di.screens;
 
+import static io.github.Di.MyGdxGame.SCR_HEIGHT;
+import static io.github.Di.MyGdxGame.SCR_WIDTH;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -17,6 +21,7 @@ public class ScreenRestart implements Screen {
     MovingBackground background;
     TextButton buttonRestart;
     PointCounter pointCounter;
+    Texture exit;
 
     int gamePoints;
 
@@ -25,6 +30,7 @@ public class ScreenRestart implements Screen {
 
         pointCounter = new PointCounter(750, 530);
         buttonRestart = new TextButton(100, 400, "Restart");
+        exit = new Texture("exit.png");
         background = new MovingBackground("background/restart_bg.png");
     }
 
@@ -45,6 +51,9 @@ public class ScreenRestart implements Screen {
             if (buttonRestart.isHit((int) touch.x, (int) touch.y)) {
                 myGdxGame.setScreen(myGdxGame.screenGame);
             }
+            if (touch.x >= SCR_WIDTH - 80 && touch.x <= SCR_WIDTH - 80 + exit.getWidth() && touch.y >= SCR_HEIGHT - 50 && touch.y <= SCR_HEIGHT - 50 + exit.getHeight()) {
+                myGdxGame.setScreen(myGdxGame.screenMenu);
+            }
         }
 
         ScreenUtils.clear(1, 0, 0, 1);
@@ -54,6 +63,7 @@ public class ScreenRestart implements Screen {
 
         background.draw(myGdxGame.batch);
         buttonRestart.draw(myGdxGame.batch);
+        myGdxGame.batch.draw(exit, SCR_WIDTH - 80, SCR_HEIGHT - 50, 80, 50);
         pointCounter.draw(myGdxGame.batch, gamePoints);
 
         myGdxGame.batch.end();
