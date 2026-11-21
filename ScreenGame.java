@@ -27,8 +27,6 @@ public class ScreenGame implements Screen {
     MovingBackground background;
     Texture heartTexture;
     Texture exit;
-    int exitX = 1200;
-    int exitY = 650;
 
     int tubeCount = 3;
     Tube[] tubes;
@@ -77,7 +75,7 @@ public class ScreenGame implements Screen {
                 new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)
             );
 
-            if (touch.x >= exitX && touch.x <= exitX + exit.getWidth() && touch.y >= exitY && touch.y <= exitY + exit.getHeight()) {
+            if (touch.x >= SCR_WIDTH - 80 && touch.x <= SCR_WIDTH - 80 + exit.getWidth() && touch.y >= SCR_HEIGHT - 50 && touch.y <= SCR_HEIGHT - 50 + exit.getHeight()) {
                 myGdxGame.setScreen(myGdxGame.screenMenu);
             }
         }
@@ -164,5 +162,3 @@ public class ScreenGame implements Screen {
     }
 
 }
-
-
